@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  integration-adaptor-111:
+    image: nhsdev/nia-111-adaptor:1.0.3
+    ports:
+      - "8081:8080"
+    environment:
+      - PEM111_AMQP_BROKER=amqp://activemq:5672
+      - PEM111_ITK_EXTERNAL_CONFIGURATION_URL=http://wiremock:8080/configuration/ods-dos
+      - LOG_LEVEL=DEBUG
+    depends_on:
+      - activemq
+      - wiremock
+    networks:
+      - 111network
+
+  activemq:
+    build: ./activemq
+    ports:
+      - "5672:5672"
+      - "8161:8161"
+    networks:
+      - 111network
+
+  wiremock:
+    build: ./wiremock
+    ports:
+      - "8110:8080"
+    command:
+      - -global-response-templating
+    networks:
+      - 111network
+networks:
+  111network:
+    external: true

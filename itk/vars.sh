@@ -1,0 +1,3 @@
+PEM111_AMQP_BROKER=amqp://activemq:5672
+PEM111_ITK_EXTERNAL_CONFIGURATION_URL=http://wiremock:8080/configuration/ods-dos
+LOG_LEVEL=DEBUG
