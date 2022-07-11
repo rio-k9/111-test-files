@@ -1,0 +1,1 @@
+curl --request POST http://13.40.139.175/api/report --data @primary-emergency-itk-request.xml -H "Content-Type: application/xml"
